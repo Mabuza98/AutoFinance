@@ -1,0 +1,21 @@
+# ====================
+# Backend (ASP.NET)
+# ====================
+AutoFinance.API/bin/
+AutoFinance.API/obj/
+AutoFinance.API/*.user
+AutoFinance.API/*.suo
+
+# ====================
+# Frontend (React / Angular / Blazor)
+# ====================
+AutoFinanceAPI-Frontend/node_modules/
+AutoFinanceAPI-Frontend/build/
+AutoFinanceAPI-Frontend/dist/
+AutoFinanceAPI-Frontend/.env
+
+# ====================
+# General / OS
+# ====================
+.vs/
+.DS_Store
