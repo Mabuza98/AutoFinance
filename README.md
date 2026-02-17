@@ -61,3 +61,11 @@ powershell
 cd autofinanceapi-frontend
 npm start
 Frontend runs at http://localhost:3000
+
+## Screenshots
+
+**Backend — Swagger UI:**  
+![Swagger UI](docs/swagger.png)
+
+**Frontend:**  
+![Frontend](docs/frontend.png)
