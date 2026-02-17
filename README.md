@@ -54,7 +54,7 @@ AutoFinance AI is a full-stack car finance project that calculates car loan affo
 bash
 cd AutoFinance.API
 dotnet run
-Backend runs at http://localhost:5206/swagger
+Backend runs at https://localhost:44376/swagger/index.html
 
 ### Frontend
 powershell
