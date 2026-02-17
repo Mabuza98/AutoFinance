@@ -1,3 +1,19 @@
+# AutoFinance AI 🚗💰
+
+## Portfolio Showcase
+
+**AutoFinance AI** is a full-stack car finance application built to demonstrate **backend financial logic, API development, and frontend integration**.  
+It calculates car loan affordability, predicts approval likelihood, evaluates risk, and suggests safer car prices for users.  
+
+This project showcases:  
+- Full-stack development skills (C# ASP.NET Core + React/Angular/Blazor)  
+- Clean layered architecture (**Models → Services → Controllers**)  
+- Professional API design with **Swagger UI**  
+- Practical financial algorithms with real-world applicability  
+
+**This repo is designed as a portfolio piece to demonstrate coding skills, architectural understanding, and front-to-back project delivery.**
+
+
 # AutoFinance AI
 
 ## Overview
