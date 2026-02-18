@@ -3,14 +3,14 @@ import "./App.css";
 
 function App() {
   const [formData, setFormData] = useState({
-    monthlySalary: "",
-    otherIncome: "",
-    monthlyExpenses: "",
-    existingDebtPayments: "",
-    carPrice: "",
-    deposit: "",
-    interestRate: "",
-    loanTermMonths: "",
+    monthlySalary:   "",
+    otherIncome:   "",
+    monthlyExpenses:   "",
+    existingDebtPayments:   "",
+    carPrice:   "",
+    deposit:   "",
+    interestRate:   "",
+    loanTermMonths:   "",
   });
 
   const [result, setResult] = useState(null);
@@ -96,12 +96,12 @@ function App() {
       {result && (
         <div className="results" style={{ marginTop: "20px" }}>
           <h2>Results:</h2>
-          <p>Total Income: {result.totalIncome}</p>
-          <p>Estimated Installment: {result.estimatedInstallmentFormatted || result.estimatedInstallment}</p>
-          <p>Debt-to-Income Ratio: {result.debtToIncomeRatioFormatted || result.debtToIncomeRatio}</p>
-          <p>Risk Level: {result.riskLevel}</p>
-          <p>Approval Probability: {result.approvalProbability}%</p>
-          <p>Suggested Car Price: {result.suggestedCarPrice}</p>
+          <p>Total Income:  {result.totalIncome}</p>
+          <p>Estimated Installment:  {result.estimatedInstallmentFormatted || result.estimatedInstallment}</p>
+          <p>Debt-to-Income Ratio:  {result.debtToIncomeRatioFormatted || result.debtToIncomeRatio}</p>
+          <p>Risk Level:  {result.riskLevel}</p>
+          <p>Approval Probability:  {result.approvalProbability}%</p>
+          <p>Suggested Car Price:  {result.suggestedCarPrice}</p>
           <p>Advice: {result.advice}</p>
         </div>
       )}
