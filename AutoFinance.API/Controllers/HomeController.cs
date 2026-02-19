@@ -1,6 +1,15 @@
-﻿namespace AutoFinance.API.Controllers
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace AutoFinance.API.Controllers
 {
-    public class HomeController
+    [ApiController]
+    [Route("/")]
+    public class HomeController : ControllerBase
     {
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok("AutoFinance API is running");
+        }
     }
 }
