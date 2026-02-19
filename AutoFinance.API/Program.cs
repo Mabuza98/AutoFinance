@@ -66,7 +66,7 @@ app.UseMiddleware<AutoFinance.API.Middleware.ExceptionMiddleware>();
 // ------------------------
 // Root endpoint (fixes 404 at /)
 // ------------------------
-app.MapGet("/", () => "AutoFinance API is running");
+// app.MapGet("/", () => "AutoFinance API is running");
 
 // Map controllers
 app.MapControllers();
