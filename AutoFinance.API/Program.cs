@@ -22,16 +22,15 @@ builder.Services.AddScoped<IFinancialCalculator, FinancialCalculator>();
 // CORS Policy - allow local dev and deployed frontend
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowReactApp", policy =>
-    {
-        policy.WithOrigins(
-            "http://localhost:3000",                  // React dev server
-            "https://autofinanceai.netlify.app"      // replace with your Netlify URL
-        )
-        .AllowAnyHeader()
-        .AllowAnyMethod();
-    });
+    options.AddPolicy("AllowAll",
+        policy =>
+        {
+            policy.AllowAnyOrigin()
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
 });
+
 
 // ------------------------
 // Set port for Render
