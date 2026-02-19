@@ -30,7 +30,7 @@ function App() {
   try {
     console.log("Sending request to backend...");
 
-    const response = await fetch("http://localhost:5206/api/Finance/analyze", {
+      const response = await fetch("https://autofinance-7o7r.onrender.com", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
