@@ -3,73 +3,44 @@ using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ------------------------
-// Add services to container
-// ------------------------
-builder.Services.AddControllers();
+// Add services to the container.
 
-// Swagger/OpenAPI
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-// Validation
 builder.Services.AddValidatorsFromAssemblyContaining<FinanceRequestValidator>();
-
-// Your services
 builder.Services.AddScoped<AiAdviceService>();
 builder.Services.AddScoped<IFinancialCalculator, FinancialCalculator>();
 
-// CORS Policy - allow local dev and deployed frontend
+// ✅ ADD THIS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll",
+    options.AddPolicy("AllowReactApp",
         policy =>
         {
-            policy.AllowAnyOrigin()
+            policy.WithOrigins("http://localhost:3000")
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
 });
 
-
-// ------------------------
-// Set port for Render
-// ------------------------
-var port = Environment.GetEnvironmentVariable("PORT") ?? "10000";
-builder.WebHost.UseUrls($"http://*:{port}");
-
 var app = builder.Build();
 
-// ------------------------
-// Middleware
-// ------------------------
-
-// Enable Swagger for both dev and production
-app.UseSwagger();
-app.UseSwaggerUI(c =>
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "AutoFinance API v1");
-});
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
-// HTTPS redirection
 app.UseHttpsRedirection();
 
-// Apply CORS before authorization
+// ✅ ADD THIS (before Authorization)
 app.UseCors("AllowReactApp");
 
 app.UseAuthorization();
 
-// Exception middleware
 app.UseMiddleware<AutoFinance.API.Middleware.ExceptionMiddleware>();
 
-// ------------------------
-// Root endpoint (fixes 404 at /)
-// ------------------------
-// app.MapGet("/", () => "AutoFinance API is running");
-
-// Map controllers
 app.MapControllers();
-
-// Run the app
 app.Run();
-

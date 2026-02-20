@@ -3,14 +3,14 @@ import "./App.css";
 
 function App() {
   const [formData, setFormData] = useState({
-    monthlySalary:   "",
-    otherIncome:   "",
-    monthlyExpenses:   "",
-    existingDebtPayments:   "",
-    carPrice:   "",
-    deposit:   "",
-    interestRate:   "",
-    loanTermMonths:   "",
+    monthlySalary: "",
+    otherIncome: "",
+    monthlyExpenses: "",
+    existingDebtPayments: "",
+    carPrice: "",
+    deposit: "",
+    interestRate: "",
+    loanTermMonths: "",
   });
 
   const [result, setResult] = useState(null);
@@ -22,52 +22,31 @@ function App() {
     setFormData({ ...formData, [name]: value });
   };
 
- const analyzeFinance = async () => {
-  setLoading(true);
-  setError(null);
-  setResult(null);
+  const analyzeFinance = async () => {
+    setLoading(true);
+    setError(null);
+    setResult(null);
 
-  try {
-    console.log("Sending request to backend...");
+    try {
+      const response = await fetch("http://localhost:5206/api/Finance/analyze", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-      const response = await fetch("https://autofinance-7o7r.onrender.com", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        monthlySalary: Number(formData.monthlySalary),
-        otherIncome: Number(formData.otherIncome),
-        monthlyExpenses: Number(formData.monthlyExpenses),
-        existingDebtPayments: Number(formData.existingDebtPayments),
-        carPrice: Number(formData.carPrice),
-        deposit: Number(formData.deposit),
-        interestRate: Number(formData.interestRate),
-        loanTermMonths: Number(formData.loanTermMonths)
-      })
-    });
+      if (!response.ok) {
+        throw new Error(`Server error: ${response.status}`);
+      }
 
-    console.log("Response status:", response.status);
-
-    // If backend returns 400, 500, etc.
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`Backend error ${response.status}: ${errorText}`);
+      const data = await response.json();
+      setResult(data);
+    } catch (err) {
+      console.error(err);
+      setError("Failed to fetch data from backend. Check console for details.");
+    } finally {
+      setLoading(false);
     }
-
-    const data = await response.json();
-    console.log("Success:", data);
-
-    setResult(data);
-
-  } catch (err) {
-    console.error("Fetch error:", err);
-    setError(err.message);
-  } finally {
-    setLoading(false);
-  }
-};
-
+  };
 
   return (
     <div className="App">
@@ -96,12 +75,12 @@ function App() {
       {result && (
         <div className="results" style={{ marginTop: "20px" }}>
           <h2>Results:</h2>
-          <p>Total Income:  {result.totalIncome}</p>
-          <p>Estimated Installment:  {result.estimatedInstallmentFormatted || result.estimatedInstallment}</p>
-          <p>Debt-to-Income Ratio:  {result.debtToIncomeRatioFormatted || result.debtToIncomeRatio}</p>
-          <p>Risk Level:  {result.riskLevel}</p>
-          <p>Approval Probability:  {result.approvalProbability}%</p>
-          <p>Suggested Car Price:  {result.suggestedCarPrice}</p>
+          <p>Total Income: {result.totalIncome}</p>
+          <p>Estimated Installment: {result.estimatedInstallmentFormatted || result.estimatedInstallment}</p>
+          <p>Debt-to-Income Ratio: {result.debtToIncomeRatioFormatted || result.debtToIncomeRatio}</p>
+          <p>Risk Level: {result.riskLevel}</p>
+          <p>Approval Probability: {result.approvalProbability}%</p>
+          <p>Suggested Car Price: {result.suggestedCarPrice}</p>
           <p>Advice: {result.advice}</p>
         </div>
       )}
@@ -110,4 +89,3 @@ function App() {
 }
 
 export default App;
-
